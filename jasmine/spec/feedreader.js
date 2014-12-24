@@ -89,22 +89,17 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test wil require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        //check when init or loadFeed is called
-        //query .feed contain and check children .entry-link for child .entry
+        //call loadFeed
+        //query .feed container and check children .entry-link for child .entry
         //loadFeed(0) loads before DOM is completed on feedreader page
         beforeEach(function(done) {
             loadFeed(0, done);
         });
-        /*afterAll(function(done) {
-            loadFeed(1,done);
-        }); */
         it('are loaded', function(done) {
-            setTimeout(function() {
             expect( $('.feed > .entry-link > .entry').length ).not.toEqual(0);
             console.log($('.feed > .entry-link').attr('href'));
-            done();
-            });           
-        }, 100);
+            done();        
+        });
     });
 
 
@@ -114,34 +109,29 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        //once done() is called the enclosing function terminates
-        //might need a spy for this one to monitor loadFeed?
-        //done() may not work for beforeAll, loadFeed0 not completing before loadFeed1
-        /*beforeAll(function(done) {
-            loadFeed(0, done());
-        });*/
         var feedDiv0,
             feedDiv1;
         
         beforeEach(function(done) {
+            //grab the href attribute of the first article in feed0
             feedDiv0 = $('.feed > .entry-link').attr('href');
-            console.log(feedDiv0);
-            loadFeed(2, done());
-        });
-        afterAll(function(done) {
-            loadFeed(0, done());
-        });
-        it('loads new content on the page', function(done) {
-            //feedDiv1 not getting correct href
-            //loadFeed(2) must not be completing on time
-            //maybe use setTimeOut
-            setTimeout(function() {
-                feedDiv1 = $('.feed > .entry-link').attr('href');
-                console.log(feedDiv1);
-                expect(feedDiv1).not.toEqual(feedDiv0);
+            //console.log(feedDiv0);
+            loadFeed(1, function() {
                 done();
-            }, 300);
-            
+            });
+        });
+        //reset page to the first feed after testing
+        afterAll(function(done) {
+            loadFeed(0, function() {
+                done();
+            });
+        });
+        it('loads new content on the page', function(done) { 
+            //grab the href attribute of the first article in feed1
+            feedDiv1 = $('.feed > .entry-link').attr('href');
+            //console.log(feedDiv1);
+            expect(feedDiv1).not.toEqual(feedDiv0);
+            done();
         });
     });
     /*new features
