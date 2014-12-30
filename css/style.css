@@ -90,3 +90,9 @@ h2 {
     padding: 1em;
     margin: 0.5em 0;
 }
+
+/* The following rule is used for 'the text for the link changes color' test */
+/*
+.marked-read {
+    color: red;
+} */

@@ -73,7 +73,6 @@ function loadFeed(id, cb) {
                 container.append(entryTemplate(entry));
             });
         }
-
         if (cb) {
             cb();
         }
@@ -129,3 +128,12 @@ $(function() {
         $('body').toggleClass('menu-hidden');
     });
 }());
+
+//The following code block passes 'the text for the link changes color' test
+//but doesn't work if a new feed is clicked on
+
+$(document).ready(function() {
+    $('body').on('click', '.entry-link', {}, function(e) {
+        $(e.target).addClass('marked-read');
+    });
+});

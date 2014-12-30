@@ -97,7 +97,7 @@ $(function() {
         });
         it('are loaded', function(done) {
             expect( $('.feed > .entry-link > .entry').length ).not.toEqual(0);
-            console.log($('.feed > .entry-link').attr('href'));
+            //console.log($('.feed > .entry-link').attr('href'));
             done();        
         });
     });
@@ -116,6 +116,7 @@ $(function() {
             //grab the href attribute of the first article in feed0
             feedDiv0 = $('.feed > .entry-link').attr('href');
             //console.log(feedDiv0);
+            //load a different feed
             loadFeed(1, function() {
                 done();
             });
@@ -134,8 +135,57 @@ $(function() {
             done();
         });
     });
+    
     /*new features
         mark an entry as read
         remove/hide an entry from the list
     */
+    
+    describe('When entries have been read', function() {
+
+        //reset class changes after testing
+        afterAll(function() {
+            $('.marked-read').toggleClass('marked-read');
+        });
+        
+        /* Each link with 'entry-link' class should have a class 'marked-read' 
+         * applied to it when it is clicked
+         * There should be corresponding CSS rules that change the color 
+         * of the link to visually indicate that the link has been read
+         */
+        it('the text for the link changes color', function() {
+            var entries = $('.entry-link');
+            //to make this test more robust it will test a feed entry at random
+            var randomEntry = Math.floor(Math.random() * entries.length);
+            
+            var originalColor = $(entries[randomEntry]).css('color');
+            //trigger a click to test
+            entries[randomEntry].click();
+            var newColor = $(entries[randomEntry]).css('color');
+            
+            expect($(entries[randomEntry]).attr('class')).toContain('marked-read');
+            //expect color value after click to NOT equal color before click
+            expect(newColor).not.toEqual(originalColor);
+        });
+        it('there is a button to mark all links as read', function() {
+
+        });
+
+
+    });
+    describe('Removing feed items:', function() {
+        it('Each item has a button', function() {
+
+        });
+
+        it('when clicked removes that feed item from the list', function() {
+
+        });
+        it('There is a button called remove read items', function() {
+
+        });
+        it('that removes items that have been marked as read', function() {
+
+        });
+    });
 }());
