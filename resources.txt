@@ -1,0 +1,2 @@
+Examples on how to use done() in Jasmine 2.1:
+http://www.htmlgoodies.com/beyond/javascript/stips/using-jasmine-2.0s-new-done-function-to-test-asynchronous-processes.html
