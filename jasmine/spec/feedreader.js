@@ -138,9 +138,7 @@ $(function() {
     
     /*new features
         mark an entry as read
-        remove/hide an entry from the list
     */
-    
     describe('When entries have been read', function() {
 
         //reset class changes after testing
@@ -166,26 +164,6 @@ $(function() {
             expect($(entries[randomEntry]).attr('class')).toContain('marked-read');
             //expect color value after click to NOT equal color before click
             expect(newColor).not.toEqual(originalColor);
-        });
-        it('there is a button to mark all links as read', function() {
-
-        });
-
-
-    });
-    describe('Removing feed items:', function() {
-        it('Each item has a button', function() {
-
-        });
-
-        it('when clicked removes that feed item from the list', function() {
-
-        });
-        it('There is a button called remove read items', function() {
-
-        });
-        it('that removes items that have been marked as read', function() {
-
         });
     });
 }());

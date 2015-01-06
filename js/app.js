@@ -130,10 +130,11 @@ $(function() {
 }());
 
 //The following code block passes 'the text for the link changes color' test
-//but doesn't work if a new feed is clicked on
-
+//in additon to the CSS rule for '.marked-read'
+/*
 $(document).ready(function() {
     $('body').on('click', '.entry-link', {}, function(e) {
         $(e.target).addClass('marked-read');
     });
 });
+*/
